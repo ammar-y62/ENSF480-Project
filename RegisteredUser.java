@@ -38,28 +38,10 @@ public class RegisteredUser extends User{
         //20$ per year
     }
     public static void earlyBooking(void){
-        //Check if 10%
-        if(){
-
-        }
-        else{
-            System.out.println("Can't book," +
-                    " early booking tickets are sold out");
-            break;
-        }
+        //Calls Ticket
     }
     @Override
     public static void cancelTicket(int h) {
-        //if >72 hours prior to the show
-        if(h<72){
-            System.out.println("Can't Cancel ticket, " +
-                    "You can only cancel tickets only up " +
-                    "to 72 hours prio to show");
-            break;
-        }
-        else{
-
-        }
-    }
+        //Calls Ticket (Diff than ordinary user)
 }
 
