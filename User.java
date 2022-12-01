@@ -4,19 +4,33 @@ public class User {
     private Theatre theatre;
     private Payment payment;
 
-    public User(Theater t){
-        theatre=t;
+    //Do we need setters and getters for theatre and payment??
+    public User(Theater t, Payment p){
+        theatre=t; //Don't we need to check if it's available first
         payment=p;
     }
+
     public static boolean searchForMovie(void) {
         //Checks if movie available
+        if(){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    public static void selectTheater(void) {
+    public static void selectTheater(Theatre t) {
         //Checks if theater available
+        if(){
+            System.out.println("Theatre not available.");
+            break;
+        }
+        else{
+            theatre=t;
+        }
     }
     public static void viewAvailableMovie(void) {
         //Displays the list of movies from database
-        //Then call availabeShowtimes
     }
     public static void viewAvailableShowtimes(void) {
         //Checks available time from database
@@ -40,6 +54,10 @@ public class User {
         }
         //receive a credit with %15 administration fee for future
         // purchase up maximum of one-year expiration date??
+        else{
+
+        }
+
     }
 }
 
