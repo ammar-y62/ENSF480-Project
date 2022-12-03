@@ -3,15 +3,21 @@ package edu.ucalgary.ensf480;
 import java.util.*;
 
 public class Theatre {
-    private Vector<String> theater;
-    // are the following needed?
-    private ShowRooms showrooms;
-    private ShowTimes showtimes;
-    private Movie movies;
+    private Vector<String> theatres;
 
-    public String selectTheather(int index) {
-        return this.theater.get(index);
+    public Theatre(Vector<String> theatre) {
+        this.theatres = theatre;
     }
 
-    // do we get access of showrooms, showtimes and movies here?
+    public String selectTheather(int index) {
+        return this.theatres.get(index);
+    }
+
+    public void addTheatre(String theatre) {
+        this.theatres.add(theatre);
+    }
+
+    public void removeTheatre(String name) {
+        this.theatres.removeElement(name);
+    }
 }
