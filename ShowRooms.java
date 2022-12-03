@@ -17,7 +17,7 @@ public class ShowRooms {
         this.rooms.add(room);
     }
 
-    public void removeRoom(String name) {
-        this.rooms.removeElement(name);
+    public void removeRoom(int room) {
+        this.rooms.removeElement(room);
     }
 }
