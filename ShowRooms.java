@@ -1,3 +1,5 @@
+package edu.ucalgary.ensf480;
+
 import java.util.*;
 
 public class ShowRooms {
@@ -7,7 +9,7 @@ public class ShowRooms {
         this.rooms.add(n);
     }
 
-    public int getRoom(int index) {
-        return this.rooms.elementAt(index);
+    public int selectRoom(int index) {
+        return this.rooms.get(index);
     }
 }

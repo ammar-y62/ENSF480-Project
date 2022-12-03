@@ -1,6 +1,11 @@
+package edu.ucalgary.ensf480;
+
 import java.util.*;
-import java.lang.*;
 
 public class ShowTimes {
     private Vector<Date> show_times;
+
+    public Date selectShowtime(int index) {
+        return this.show_times.get(index);
+    }
 }

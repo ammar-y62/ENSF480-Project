@@ -1,16 +1,17 @@
+package edu.ucalgary.ensf480;
+
 import java.util.*;
-import java.lang.*;
 
 public class Theatre {
-    private String theater_name;
-    private ShowRooms show_rooms;
-    private ShowTimes show_times;
-    
-    public Theatre(String name) {
-        this.theater_name = name;
+    private Vector<String> theater;
+    // are the following needed?
+    private ShowRooms showrooms;
+    private ShowTimes showtimes;
+    private Movie movies;
+
+    public String selectTheather(int index) {
+        return this.theater.get(index);
     }
 
-    public String getTheather() {
-        return theater_name;
-    }
+    // do we get access of showrooms, showtimes and movies here?
 }
