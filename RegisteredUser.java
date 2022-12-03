@@ -6,12 +6,9 @@ public class RegisteredUser extends User{
     private String address;
     private String card;
 
-
-    //Do we need destructor and copy constructor and = operator for
-    //Java??
-
     //Inherit constructor????
-    public RegisteredUser(String n, String a, String c){
+    public RegisteredUser(Theatre t, Payment p,Vector<Seats> s, String n, String a, String c){
+        super(t, p,s);
         name=n;
         address=a;
         card=c;
@@ -34,10 +31,10 @@ public class RegisteredUser extends User{
     public void setCard(String c){
         card=c;
     }
-    public static void annualFeePayment(void) {
+    public static void annualFeePayment() {
         //20$ per year
     }
-    public static void earlyBooking(void){
+    public static void earlyBooking(){
         //Calls Ticket
     }
     @Override
