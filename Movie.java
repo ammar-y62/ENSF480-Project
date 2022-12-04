@@ -8,7 +8,7 @@ class Movie{
 
 	private String title;
 
-	private Showroom showroom;
+	private ShowRooms showroom;
 	
 	
 	
