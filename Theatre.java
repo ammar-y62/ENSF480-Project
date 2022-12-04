@@ -19,6 +19,11 @@ public class Theatre {
         return movies;
     }
 
+    public Movie selectMovie(Movie movie) {
+        int index = movies.indexOf(movie);
+        return this.movies.get(index);
+    }
+
     public void addMovie(Movie movie) {
         movies.add(movie);
     }
@@ -29,6 +34,11 @@ public class Theatre {
 
     public Vector<ShowRooms> getRooms() {
         return showrooms;
+    }
+
+    public ShowRooms selectShowRoom(ShowRooms showroom) {
+        int index = showrooms.indexOf(showroom);
+        return this.showrooms.get(index);
     }
 
     public void addShowRoom(ShowRooms room) {

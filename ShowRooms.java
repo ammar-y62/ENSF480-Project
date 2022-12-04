@@ -12,34 +12,40 @@ public class ShowRooms {
     }
 
     public int getRoom() {
-        return room;
+        return this.room;
     }
 
     public Vector<ShowTimes> getShowTimes() {
-        return showtimes;
+        return this.showtimes;
     }
 
     public ShowTimes selectShowTime(ShowTimes showtime) {
-        return showtimes.get(showtime); // change this to get element of that showtime
+        int index = showtimes.indexOf(showtime);
+        return this.showtimes.get(index);
     }
 
     public void addShowTime(ShowTimes showtime) {
-        showtimes.add(showtime);
+        this.showtimes.add(showtime);
     }
 
     public void removeShowTime(ShowTimes showtime) {
-        showtimes.remove(showtime);
+        this.showtimes.remove(showtime);
     }
 
     public Vector<Seats> getSeats() {
-        return seats;
+        return this.seats;
     }
 
-    public void addShowTime(Seats seat) {
-        seats.add(seat);
+    public Seats selectSeat(Seats seat) {
+        int index = showtimes.indexOf(seat);
+        return this.showtimes.get(index);
     }
 
-    public void removeShowTime(Seats seat) {
-        seats.remove(seat);
+    public void addSeat(Seats seat) {
+        this.seats.add(seat);
+    }
+
+    public void removeSeat(Seats seat) {
+        this.seats.remove(seat);
     }
 }
