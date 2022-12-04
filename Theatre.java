@@ -3,21 +3,39 @@ package edu.ucalgary.ensf480;
 import java.util.*;
 
 public class Theatre {
-    private Vector<String> theatres;
+    private String theatre_name;
+    private Vector<Movie> movies;
+    private Vector<ShowRooms> showrooms;
 
-    public Theatre(Vector<String> theatre) {
-        this.theatres = theatre;
+    public Theatre(String theatre) {
+        this.theatre_name = theatre;
     }
 
-    public String selectTheather(int index) {
-        return this.theatres.get(index);
+    public String getTheatre() {
+        return theatre_name;
     }
 
-    public void addTheatre(String theatre) {
-        this.theatres.add(theatre);
+    public Vector<Movie> getMovies() {
+        return movies;
     }
 
-    public void removeTheatre(String name) {
-        this.theatres.removeElement(name);
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+    }
+
+    public void removeMovie(Movie movie) {
+        movies.remove(movie);
+    }
+
+    public Vector<ShowRooms> getRooms() {
+        return showrooms;
+    }
+
+    public void addShowRoom(ShowRooms room) {
+        showrooms.add(room);
+    }
+
+    public void removeShowRoom(ShowRooms room) {
+        showrooms.remove(room);
     }
 }

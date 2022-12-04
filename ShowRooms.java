@@ -3,21 +3,43 @@ package edu.ucalgary.ensf480;
 import java.util.*;
 
 public class ShowRooms {
-    private Vector<Integer> rooms = new Vector<>();
+    private int room;
+    private Vector<ShowTimes> showtimes;
+    private Vector<Seats> seats;
 
-    public ShowRooms(Vector<Integer> room) {
-        this.rooms = room;
+    public ShowRooms(int room) {
+        this.room = room;
     }
 
-    public int selectRoom(int index) {
-        return this.rooms.get(index);
+    public int getRoom() {
+        return room;
     }
 
-    public void addRoom(int room) {
-        this.rooms.add(room);
+    public Vector<ShowTimes> getShowTimes() {
+        return showtimes;
     }
 
-    public void removeRoom(int room) {
-        this.rooms.removeElement(room);
+    public ShowTimes selectShowTime(ShowTimes showtime) {
+        return showtimes.get(showtime); // change this to get element of that showtime
+    }
+
+    public void addShowTime(ShowTimes showtime) {
+        showtimes.add(showtime);
+    }
+
+    public void removeShowTime(ShowTimes showtime) {
+        showtimes.remove(showtime);
+    }
+
+    public Vector<Seats> getSeats() {
+        return seats;
+    }
+
+    public void addShowTime(Seats seat) {
+        seats.add(seat);
+    }
+
+    public void removeShowTime(Seats seat) {
+        seats.remove(seat);
     }
 }
