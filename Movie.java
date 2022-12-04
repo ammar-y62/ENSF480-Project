@@ -17,7 +17,7 @@ class Movie{
 		return this.title;
 	}
 	
-	public Showroom getShowroom(){
+	public ShowRooms getShowroom(){
 		return this.showroom;
 	}
 	
