@@ -37,8 +37,8 @@ public class ShowRooms {
     }
 
     public Seats selectSeat(Seats seat) {
-        int index = showtimes.indexOf(seat);
-        return this.showtimes.get(index);
+        int index = seats.indexOf(seat);
+        return this.seats.get(index);
     }
 
     public void addSeat(Seats seat) {
