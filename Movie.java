@@ -11,14 +11,18 @@ class Movie{
 	private ShowRooms showroom;
 	
 	
+	public Movie(String name, ShowRooms room){
+		this.title = name;
+		this.showroom = room;
+	}
 	
 	
 	public String getMovieName(){
-		return this.title;
+		return title;
 	}
 	
 	public ShowRooms getShowroom(){
-		return this.showroom;
+		return showroom;
 	}
 	
 
