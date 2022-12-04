@@ -11,7 +11,7 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class AccountAccess extends GUI implements ActionListener
+public class AccountAccessGUI extends GUI implements ActionListener
 {    
     private JLabel instructions;
     private JLabel nameLabel;
@@ -49,7 +49,7 @@ public class AccountAccess extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public AccountAccess()
+    public AccountAccessGUI()
     {
         gui = new GUI("Account");
     }

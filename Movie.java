@@ -1,8 +1,6 @@
-
+package edu.ucalgary.ensf480;
 
 import java.util.*;
-
-
 
 class Movie{
 

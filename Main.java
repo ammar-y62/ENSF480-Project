@@ -11,7 +11,7 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class Main extends GUI implements ActionListener
+public class MainGUI extends GUI implements ActionListener
 {    
     JButton exit = new JButton("Exit");
     JButton cancelTicket = new JButton("Cancel Ticket");
@@ -34,7 +34,7 @@ public class Main extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public Main()
+    public MainGUI()
     {
         gui = new GUI("Main");
     }

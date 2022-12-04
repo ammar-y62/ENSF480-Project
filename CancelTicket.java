@@ -11,7 +11,7 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class CancelTicket extends GUI implements ActionListener
+public class CancelTicketGUI extends GUI implements ActionListener
 {    
     private JLabel instructions;
     private JLabel emailLabel;
@@ -37,7 +37,7 @@ public class CancelTicket extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public CancelTicket()
+    public CancelTicketGUI()
     {
         gui = new GUI("Ticket Cancellation");
     }

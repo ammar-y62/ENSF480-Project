@@ -1,6 +1,10 @@
-public class Pay 
+package edu.ucalgary.ensf480;
+
+import java.util.*;
+
+public class Payment 
 {
-    Pay(User user, Ticket ticket)
+    Payment(User user, Ticket ticket)
     {
 
     }
