@@ -11,7 +11,7 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class TheatreMovie extends GUI implements ActionListener
+public class TheatreMovieGUI extends GUI implements ActionListener
 {    
     private String[] columns = {"Theatre", "Movie"};
     private JLabel instructions;
@@ -35,7 +35,7 @@ public class TheatreMovie extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public TheatreMovie()
+    public TheatreMovieGUI()
     {
         gui = new GUI("Theatre & Movie");
     }

@@ -11,19 +11,19 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class Show extends GUI implements ActionListener
+public class Tickets extends GUI implements ActionListener
 {    
-    private String[] columns = {"Theatre", "Movie"};
     private JLabel instructions;
     
     JButton exit = new JButton("Exit");
-    JButton pay = new JButton("Pay");
+    JButton main = new JButton("Main Menu");
     
     JPanel headerPanel = new JPanel();
     JPanel panel = new JPanel();
     JPanel endPanel = new JPanel();
-        
-    JTable table;
+    
+    JList currentTickets;
+    JList pastTickets;
     
     GUI gui;
     Movie movies;
@@ -35,17 +35,19 @@ public class Show extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public Show()
+    public Tickets()
     {
-        gui = new GUI("Show");
+        gui = new GUI("Ticket List");
     }
     
-    public void setupShow(Object[][] data){
+    public void setupTickets(String[] current, String[] past){
         
-        instructions = new JLabel("Please select the show");
-        table = new JTable(data, columns);
+        instructions = new JLabel("Please finalize the ticket");
         
-        pay.addActionListener(this);
+        currentTickets = new JList(current);
+        pastTickets = new JList(past);
+        
+        main.addActionListener(this);
         exit.addActionListener(this);
         
         headerPanel.setLayout(new FlowLayout());
@@ -54,9 +56,10 @@ public class Show extends GUI implements ActionListener
         
         headerPanel.add(instructions);
         
-        panel.add(theatres);
+        panel.add(currentTickets);
+        panel.add(pastTickets);
         
-        endPanel.add(pay);
+        endPanel.add(main);
         endPanel.add(exit);
         
         gui.add(headerPanel, BorderLayout.NORTH);
@@ -72,7 +75,7 @@ public class Show extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == pay)
+        if(event.getSource() == cancelTicket)
         {
             
         }

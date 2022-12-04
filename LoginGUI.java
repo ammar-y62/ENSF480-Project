@@ -11,7 +11,7 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class Login extends GUI implements ActionListener
+public class LoginGUI extends GUI implements ActionListener
 {
     private boolean registered = false;
     private JLabel instructions;
@@ -41,7 +41,7 @@ public class Login extends GUI implements ActionListener
     String dbEmail;
     String dbCardNumber;
     
-    public Login()
+    public LoginGUI()
     {
         gui = new GUI("Login");
     }
