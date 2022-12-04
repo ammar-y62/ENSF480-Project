@@ -7,8 +7,8 @@ public class RegisteredUser extends User{
     private String card;
 
     //Inherit constructor????
-    public RegisteredUser(Theatre t, Payment p,Vector<Seats> s, String n, String a, String c){
-        super(t, p,s);
+    public RegisteredUser(Vector<Theatre> t, Payment p, String n, String a, String c){
+        super(t, p);
         name=n;
         address=a;
         card=c;
