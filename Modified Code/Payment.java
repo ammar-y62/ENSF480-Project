@@ -11,10 +11,14 @@ public class Payment
     Payment(User user, Ticket ticket)
     {
         dbConnect("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+        this.ticket = ticket;
+        ticket.getSeat().changeSeatAvailability(0);
     }
     Payment(RegisteredUser ruser, Ticket ticket)
     {
         dbConnect("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+        this.ticket = ticket;
+        ticket.getSeat().changeSeatAvailability(0);
     }
     public void dbConnect(String dburl, String username, String password){
         try {

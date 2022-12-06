@@ -14,7 +14,7 @@ public class MainGUI extends GUI implements ActionListener
     JButton exit = new JButton("Exit");
     JButton cancelTicket = new JButton("Cancel Ticket");
     JButton accountInfo = new JButton("Account Information");
-    JButton selectTheatreMovie = new JButton("Select Theathre & Movie");
+    JButton selectTheatre = new JButton("Select Theathre");
     JButton ticketList = new JButton("Ticket List");
     
     JPanel panel = new JPanel();
@@ -35,20 +35,30 @@ public class MainGUI extends GUI implements ActionListener
     public MainGUI(User user)
     {
         gui = new GUI("Main");
+        this.user = user;
+        setupMain();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
 
     public MainGUI(RegisteredUser ruser)
     {
+        this.ruser = ruser;
         if(ruser.getRegistration())
         {
             registration = true;
         }
         gui = new GUI("Main");
+        setupMain();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
-    public void setupLogin(){
+    public void setupMain(){
         
-        selectTheatreMovie.addActionListener(this);
+        selectTheatre.addActionListener(this);
         cancelTicket.addActionListener(this);
         exit.addActionListener(this);
         ticketList.addActionListener(this);
@@ -57,7 +67,7 @@ public class MainGUI extends GUI implements ActionListener
         endPanel.setLayout(new FlowLayout());
         
         
-        panel.add(selectTheatreMovie);
+        panel.add(selectTheatre);
         panel.add(cancelTicket);
         
         if(registration){
@@ -79,19 +89,25 @@ public class MainGUI extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == selectTheatreMovie)
+        if(event.getSource() == selectTheatre)
         {
-        
+            new TheatreGUI();
         }
         
         if(event.getSource() == accountInfo)
         {
-            
+            new AccountAccessGUI(this.ruser);
         }
         
         if(event.getSource() == cancelTicket)
         {
-            
+            if(registration)
+            {
+                new CancelTicketGUI(ruser);
+            }
+            else{
+                new CancelTicketGUI();
+            }
         }
     }
     

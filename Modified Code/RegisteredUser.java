@@ -8,7 +8,7 @@ public class RegisteredUser extends User{
 
     //Inherit constructor????
     public RegisteredUser(String name, String address, String card, String email){
-        super(email, true);
+        super(true);
         this.name=name;
         this.address=address;
         this.card=card;

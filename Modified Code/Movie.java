@@ -3,7 +3,7 @@ import java.util.*;
 class Movie{
 
 	private String title;
-	private ShowRooms showroom;
+	private Vector<ShowRooms> showroom;
 	
 	
 	public Movie(String name){
@@ -16,10 +16,10 @@ class Movie{
 	}
 	public void setShowRoom(ShowRooms showroom)
 	{
-		this.showroom = showroom;
+		this.showroom.add(showroom);
 	}
 	
-	public ShowRooms getShowroom(){
+	public Vector<ShowRooms> getShowroom(){
 		return showroom;
 	}
 	

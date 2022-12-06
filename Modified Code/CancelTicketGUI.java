@@ -24,12 +24,15 @@ public class CancelTicketGUI extends GUI implements ActionListener
     JPanel headerPanel = new JPanel();
     JPanel panel = new JPanel();
     JPanel endPanel = new JPanel();
-    
+    boolean registered = false;
     GUI gui;
     Movie movies;
     Theatre theatres;
     User user;
+    Ticket ticket;
     RegisteredUser ruser;
+    String email;
+    String ticketID;
     
     Connection dbConnect;
     Statement stmt;
@@ -38,6 +41,19 @@ public class CancelTicketGUI extends GUI implements ActionListener
     public CancelTicketGUI()
     {
         gui = new GUI("Ticket Cancellation");
+        setupCancelTicket();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
+    }
+    public CancelTicketGUI(RegisteredUser ruser)
+    {
+        gui = new GUI("Ticket Cancellation");
+        registered = true;
+        setupCancelTicket();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
     public void setupCancelTicket(){
@@ -55,8 +71,11 @@ public class CancelTicketGUI extends GUI implements ActionListener
         
         headerPanel.add(instructions);
         
+        if(!registered)
+        {
         panel.add(emailLabel);
         panel.add(emailInput);
+        }
         panel.add(ticketIDLabel);
         panel.add(ticketIDInput);
         
@@ -78,16 +97,34 @@ public class CancelTicketGUI extends GUI implements ActionListener
         
         if(event.getSource() == cancelTicket)
         {
-            
+            if(registered)
+            {
+                this.email = this.user.getEmail();
+            }
+            else{
+                this.email = emailInput.getText();
+            }
+            this.ticketID = ticketIDInput.getText();
         }
     }
     
-    public void dbCancelTicket()
+    public void dbCancelTicket(String dburl, String username, String password)
     {
-        int dbID = 0;
-        
-        Ticket ticket = new Ticket(dbID);
-        ticket.getSeat().changeSeatAvailability(1);
+        this.ticket.getSeat().changeSeatAvailability(1);
+        try {
+            dbConnect = DriverManager.getConnection(dburl, username, password);
+            stmt=dbConnect.createStatement();
+
+            rs=stmt.executeQuery("delete from tickets where ticketid='"+ this.ticketID +"' AND email='"+this.email+"';");
+            while(rs.next()){
+                
+            }
+            rs.close();
+            stmt.close();
+            dbConnect.close();
+
+        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
+        }
 
     }
     public void dbConnect(String dburl, String username, String password){

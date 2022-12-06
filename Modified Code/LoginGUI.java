@@ -44,6 +44,10 @@ public class LoginGUI extends GUI implements ActionListener
     public LoginGUI()
     {
         gui = new GUI("Login");
+        setupLogin();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
     public void setupLogin(){
@@ -99,7 +103,8 @@ public class LoginGUI extends GUI implements ActionListener
             }
             else if(passwordInput.equals(dbPassword))
             {
-                RegisteredUser ruser = new RegisteredUser(dbName, dbAddress, dbCardNumber, dbEmail);
+                this.ruser = new RegisteredUser(dbName, dbAddress, dbCardNumber, dbEmail);
+                new MainGUI(ruser);
             }
             else
             {
@@ -111,7 +116,8 @@ public class LoginGUI extends GUI implements ActionListener
         
         if(event.getSource() == guest)
         {
-            User user = new User(false);
+            this.user = new User(false);
+            new MainGUI(user);
         }
     }
     

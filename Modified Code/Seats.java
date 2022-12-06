@@ -29,5 +29,10 @@ class Seats{
 		this.taken = availability;
 	}
 
+	public int getSeatAvailability()
+	{
+		return this.taken;
+	}
+
 
 }

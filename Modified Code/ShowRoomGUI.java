@@ -9,13 +9,12 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class TheatreGUI extends GUI implements ActionListener
+public class ShowRoomGUI extends GUI implements ActionListener
 {    
-    private String[] columns = {"Theatre", "Movie"};
     private JLabel instructions;
     
     JButton exit = new JButton("Exit");
-    JButton selectMovie = new JButton("Select Movie");
+    JButton selectShowTime = new JButton("Select Show Time");
     
     JPanel headerPanel = new JPanel();
     JPanel panel = new JPanel();
@@ -24,53 +23,47 @@ public class TheatreGUI extends GUI implements ActionListener
     JList list;
     
     GUI gui;
-    Movie movies;
-    Theatre theatres;
+    Movie movie;
+    Theatre theatre;
     User user;
-    Vector<Theatre> theatresVector;
     RegisteredUser ruser;
-    TicketingSystem system;
+    Vector<ShowRooms> showRoomVector;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public TheatreGUI()
+    public ShowRoomGUI(Theatre theatre, Movie movie)
     {
-        gui = new GUI("Theatre & Movie");
-        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+        gui = new GUI("Show Room");
+        this.theatre = theatre;
+        this.movie = movie;
         int i = 0;
-        this.theatresVector = this.system.getTheatres();
-        String [] theatreList = new String[this.theatresVector.size()];
-        while(i < this.theatresVector.size())
+        this.showRoomVector = this.movie.getShowroom();
+        String [] showRoomList = new String[this.showRoomVector.size()];
+        while(i < this.showRoomVector.size())
         {
-            theatreList[i] = this.theatresVector.get(i).getTheatre();
+            showRoomList[i] = Integer.toString(this.showRoomVector.get(i).getRoom());
         }
-        setupTheatre(theatreList);
-        setSize(325,300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        gui.setVisible(true);
     }
     
-    public void setupTheatre(String[] data){
+    public void setupShow(String[] data){
         
-        instructions = new JLabel("Please select the theatre & movie");
+        instructions = new JLabel("Please select the show");
         list = new JList(data);
         
-        selectMovie.addActionListener(this);
+        selectShowTime.addActionListener(this);
         exit.addActionListener(this);
         
         headerPanel.setLayout(new FlowLayout());
-        
         panel.setLayout(new FlowLayout());
-        
         endPanel.setLayout(new FlowLayout());
         
         headerPanel.add(instructions);
         
         panel.add(list);
         
-        endPanel.add(selectMovie);
+        endPanel.add(selectShowTime);
         endPanel.add(exit);
         
         gui.add(headerPanel, BorderLayout.NORTH);
@@ -86,11 +79,9 @@ public class TheatreGUI extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == selectMovie)
+        if(event.getSource() == selectShowTime)
         {
-            int i = list.getSelectedIndex();
-            this.theatres = theatresVector.get(i);
-            new MovieGUI(this.theatres);
+            
         }
     }
     

@@ -33,8 +33,9 @@ public class TicketGUI extends GUI implements ActionListener
     Statement stmt;
     ResultSet rs;
     
-    public TicketGUI()
+    public TicketGUI(User user)
     {
+        this.user = user;
         gui = new GUI("Ticket List");
     }
     
@@ -84,7 +85,7 @@ public class TicketGUI extends GUI implements ActionListener
             dbConnect = DriverManager.getConnection(dburl, username, password);
             stmt=dbConnect.createStatement();
 
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
+            rs=stmt.executeQuery("select * from tickets where email='"+ this.user.getEmail() +"';");
             while(rs.next()){
                 
             }
