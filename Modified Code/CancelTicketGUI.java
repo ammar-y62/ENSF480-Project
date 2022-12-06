@@ -48,6 +48,7 @@ public class CancelTicketGUI extends GUI implements ActionListener
     }
     public CancelTicketGUI(RegisteredUser ruser)
     {
+        this.user = ruser;
         gui = new GUI("Ticket Cancellation");
         registered = true;
         setupCancelTicket();
@@ -126,22 +127,5 @@ public class CancelTicketGUI extends GUI implements ActionListener
         } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
         }
 
-    }
-    public void dbConnect(String dburl, String username, String password){
-        try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
-
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
-            while(rs.next()){
-                
-            }
-            rs.close();
-            stmt.close();
-            dbConnect.close();
-
-        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
-        }
-    }
-    
+    }    
 }
