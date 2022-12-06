@@ -14,7 +14,7 @@ public class ShowTimesGUI extends GUI implements ActionListener
     private JLabel instructions;
     private String[] columns = {"Date", "Time"};
     JButton exit = new JButton("Exit");
-    JButton selectShowRoom = new JButton("Select Show Time");
+    JButton selectSeat = new JButton("Select Seat");
     
     JPanel headerPanel = new JPanel();
     JPanel panel = new JPanel();
@@ -30,15 +30,17 @@ public class ShowTimesGUI extends GUI implements ActionListener
     Vector<ShowTimes> showTimeVector;
     RegisteredUser ruser;
     TicketingSystem system;
+    Ticket ticket;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public ShowTimesGUI(ShowRooms showroom)
+    public ShowTimesGUI(ShowRooms showroom, Ticket ticket)
     {
         gui = new GUI("Show Times");
         this.showroom = showroom;
+        this.ticket = ticket;
         this.showTimeVector = this.showroom.getShowTimes();
         int i = 0;
         String [][] showTimeList = new String[this.showTimeVector.size()][2];
@@ -46,15 +48,20 @@ public class ShowTimesGUI extends GUI implements ActionListener
         {
             showTimeList[i][0] = this.showTimeVector.get(i).getDate();
             showTimeList[i][1] = this.showTimeVector.get(i).getTime();
+            i++;
         }
+        setupShowTime(showTimeList);
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
-    public void setupTheatre(String[][] data){
+    public void setupShowTime(String[][] data){
         
         instructions = new JLabel("Please select the theatre & movie");
         table = new JTable(data, columns);
         
-        selectShowRoom.addActionListener(this);
+        selectSeat.addActionListener(this);
         exit.addActionListener(this);
         
         headerPanel.setLayout(new FlowLayout());
@@ -67,7 +74,7 @@ public class ShowTimesGUI extends GUI implements ActionListener
         
         panel.add(table);
         
-        endPanel.add(selectShowRoom);
+        endPanel.add(selectSeat);
         endPanel.add(exit);
         
         gui.add(headerPanel, BorderLayout.NORTH);
@@ -83,9 +90,11 @@ public class ShowTimesGUI extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == selectShowRoom)
+        if(event.getSource() == selectSeat)
         {
-            
+            int i = table.getSelectedRow();
+            this.ticket.setShowTimes(showTimeVector.get(i));
+            new SeatsGUI(this.ticket);
         }
     }
     

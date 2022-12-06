@@ -6,12 +6,14 @@ import java.lang.Math;
 class Ticket{
 
 	private int ticketID;
+	boolean registration = false;
 	private Theatre theatre;
 	private Movie movie;
 	private ShowRooms showroom;
 	private ShowTimes showtime;
 	private Seats seat; // you get a ticket for every set you book. Three seats requires three tickets
 	private User user;
+	private RegisteredUser ruser;
 	
 	
 	//if we need another design pattern, could implement an observer to update whenever a ticket number is produced
@@ -54,6 +56,10 @@ class Ticket{
 	{
 		return this.user;
 	}
+	public RegisteredUser getRegisteredUser()
+	{
+		return this.ruser;
+	}
 
 	public void setMovie(Movie movie)
 	{
@@ -74,6 +80,21 @@ class Ticket{
 	{
 		this.seat = seat;
 		this.seat.changeSeatAvailability(1);
+	}
+
+	public void setUser(User user)
+	{
+		this.user = user;
+	}
+	public void setRegisteredUser(RegisteredUser ruser)
+	{
+		this.ruser = ruser;
+		this.registration = true;
+	}
+
+	public boolean getRegistration()
+	{
+		return this.registration;
 	}
 	
 	public int getTicketID(){

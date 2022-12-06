@@ -28,26 +28,33 @@ public class ShowRoomGUI extends GUI implements ActionListener
     User user;
     RegisteredUser ruser;
     Vector<ShowRooms> showRoomVector;
+    Ticket ticket;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public ShowRoomGUI(Theatre theatre, Movie movie)
+    public ShowRoomGUI(Theatre theatre, Movie movie, Ticket ticket)
     {
         gui = new GUI("Show Room");
         this.theatre = theatre;
         this.movie = movie;
+        this.ticket = ticket;
         int i = 0;
         this.showRoomVector = this.movie.getShowroom();
         String [] showRoomList = new String[this.showRoomVector.size()];
         while(i < this.showRoomVector.size())
         {
             showRoomList[i] = Integer.toString(this.showRoomVector.get(i).getRoom());
+            i++;
         }
+        setupShowRoom(showRoomList);
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
-    public void setupShow(String[] data){
+    public void setupShowRoom(String[] data){
         
         instructions = new JLabel("Please select the show");
         list = new JList(data);
@@ -81,24 +88,9 @@ public class ShowRoomGUI extends GUI implements ActionListener
         
         if(event.getSource() == selectShowTime)
         {
-            
-        }
-    }
-    
-    public void dbConnect(String dburl, String username, String password){
-        try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
-
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
-            while(rs.next()){
-                
-            }
-            rs.close();
-            stmt.close();
-            dbConnect.close();
-
-        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
+            int i = list.getSelectedIndex();
+            this.ticket.setShowRoom(showRoomVector.get(i));
+            new ShowTimesGUI(showRoomVector.get(i), this.ticket);
         }
     }
     

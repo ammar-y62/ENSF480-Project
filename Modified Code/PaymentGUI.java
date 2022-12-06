@@ -13,11 +13,11 @@ public class PaymentGUI extends GUI implements ActionListener
 {    
     private JLabel instructions;
     private JLabel nameLabel;
-    private JLabel addressLabel;
+    private JLabel emailAddressLabel;
     private JLabel cardLabel;
     
     private JTextField nameInput;
-    private JTextField addressInput;
+    private JTextField emailAddressInput;
     private JTextField cardInput;
     
     JButton exit = new JButton("Exit");
@@ -32,21 +32,27 @@ public class PaymentGUI extends GUI implements ActionListener
     Theatre theatres;
     User user;
     RegisteredUser ruser;
+    Ticket ticket;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public PaymentGUI()
+    public PaymentGUI(Ticket ticket)
     {
         gui = new GUI("Payment");
+        this.ticket = ticket;
+        setupPayment();
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
     public void setupPayment(){
         
         instructions = new JLabel("Please finalize the ticket");
         nameLabel = new JLabel("Name on the card");
-        addressLabel = new JLabel("Billing Adress");
+        emailAddressLabel = new JLabel("Email Adress");
         cardLabel = new JLabel("Card Number");
         
         purchase.addActionListener(this);
@@ -60,8 +66,8 @@ public class PaymentGUI extends GUI implements ActionListener
         
         panel.add(nameLabel);
         panel.add(nameInput);
-        panel.add(addressLabel);
-        panel.add(addressLabel);
+        panel.add(emailAddressLabel);
+        panel.add(emailAddressInput);
         panel.add(cardLabel);
         panel.add(cardInput);
         
@@ -83,24 +89,17 @@ public class PaymentGUI extends GUI implements ActionListener
         
         if(event.getSource() == purchase)
         {
-            
-        }
-    }
-    
-    public void dbConnect(String dburl, String username, String password){
-        try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
-
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
-            while(rs.next()){
+            if(cardInput.getText().length() == 16)
+            {
+                if(this.ticket.getRegistration())
+                {
+                    new Payment(this.ticket.getRegisteredUser(), this.ticket);
+                }
+                else{
+                    new Payment(this.ticket.getUser(), this.ticket);
+                }
                 
             }
-            rs.close();
-            stmt.close();
-            dbConnect.close();
-
-        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
         }
     }
     

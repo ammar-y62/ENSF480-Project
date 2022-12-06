@@ -57,15 +57,11 @@ public class TicketingSystem
                 Theatre theatre = new Theatre(this.list.get(i).get(1), list);
                 theatres.add(theatre);
             }
+            i++;
         }
-        i++;
+        
     }
 
-    public static void main(String[] args)
-    {
-        /*if(args.length != 0)
-            System.out.println("Invalid number of arguments");*/
-        return;
-    }
+    
 }
 

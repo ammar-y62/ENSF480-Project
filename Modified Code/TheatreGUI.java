@@ -30,6 +30,9 @@ public class TheatreGUI extends GUI implements ActionListener
     Vector<Theatre> theatresVector;
     RegisteredUser ruser;
     TicketingSystem system;
+    int id = 0;
+    Ticket ticket = new Ticket(id);
+    
     
     Connection dbConnect;
     Statement stmt;
@@ -38,7 +41,7 @@ public class TheatreGUI extends GUI implements ActionListener
     public TheatreGUI()
     {
         gui = new GUI("Theatre & Movie");
-        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "TThheevin25170");
         int i = 0;
         this.theatresVector = this.system.getTheatres();
         String [] theatreList = new String[this.theatresVector.size()];
@@ -90,7 +93,8 @@ public class TheatreGUI extends GUI implements ActionListener
         {
             int i = list.getSelectedIndex();
             this.theatres = theatresVector.get(i);
-            new MovieGUI(this.theatres);
+            this.ticket.setTheatre(this.theatres);
+            new MovieGUI(this.theatres, this.ticket);
         }
     }
     

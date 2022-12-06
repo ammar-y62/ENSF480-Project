@@ -15,7 +15,7 @@ public class SeatsGUI extends GUI implements ActionListener
     private JLabel instructions;
     private String[] columns = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     JButton exit = new JButton("Exit");
-    JButton selectSeat = new JButton("Select Seat");
+    JButton checkOut = new JButton("Check Out");
     
     int row = 10, column = 10;
     JPanel headerPanel = new JPanel();
@@ -32,24 +32,23 @@ public class SeatsGUI extends GUI implements ActionListener
     Theatre theatre;
     User user;
     ShowRooms showroom;
-    Seats seat;
     Vector<Seats>seatVector;
     RegisteredUser ruser;
     TicketingSystem system;
-    String ticketID;
+    Ticket ticket;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public SeatsGUI(Seats seat)
+    public SeatsGUI(Ticket ticket)
     {
         gui = new GUI("Seats");
-        this.seat = seat;
-        this.seatVector = this.showroom.getSeats();
+        this.ticket = ticket;
+        this.seatVector = this.ticket.getShowRoom().getSeats();
         int i = 0;
         int j = 0;
-        String [][] seatList = new String[this.seatVector.size()][2];
+        String [][] seatsList = new String[this.seatVector.size()][2];
         while(i < this.seatVector.size())
         {
             if(j == 10)
@@ -57,10 +56,10 @@ public class SeatsGUI extends GUI implements ActionListener
                 j = 0;
                 i++;
             }
-            seatList[i][j] = Integer.toString(this.seatVector.get(i).getSeatAvailability());
+            seatsList[i][j] = Integer.toString(this.seatVector.get(i).getSeatAvailability());
             j++;
         }
-        setupSeatsMap(seatList);
+        setupSeatsMap(seatsList);
         setSize(325,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         gui.setVisible(true);
@@ -71,7 +70,7 @@ public class SeatsGUI extends GUI implements ActionListener
         table = new JTable(data, columns);
         seatNumberInstructions = new JLabel("Please enter the seat ID");
         
-        selectSeat.addActionListener(this);
+        checkOut.addActionListener(this);
         exit.addActionListener(this);
         
         headerPanel.setLayout(new FlowLayout());
@@ -86,7 +85,7 @@ public class SeatsGUI extends GUI implements ActionListener
         panel.add(seatNumberInstructions);
         panel.add(seatID);
         
-        endPanel.add(selectSeat);
+        endPanel.add(checkOut);
         endPanel.add(exit);
         
         gui.add(headerPanel, BorderLayout.NORTH);
@@ -102,14 +101,18 @@ public class SeatsGUI extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == selectSeat)
+        if(event.getSource() == checkOut)
         {
-            if(this.seat.getSeatAvailability() == 1) {
-                this.ticketID = seatID.getText();
-                this.seat.changeSeatAvailability(0);
+            int id = Integer.parseInt(seatID.getText());
+            
+            if(seatVector.get(id).getSeatAvailability() == 1) {
+                this.ticket.setSeat(seatVector.get(id));
+                this.ticket.getSeat().changeSeatAvailability(0);
             } else {
-                // how do we do nothing?
+                JOptionPane.showMessageDialog(null," This seat is unavailable");
             }
+
+            new PaymentGUI(this.ticket);
         }
     }
     

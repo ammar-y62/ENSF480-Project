@@ -29,15 +29,17 @@ public class MovieGUI extends GUI implements ActionListener
     Vector<Movie> movieVector;
     RegisteredUser ruser;
     TicketingSystem system;
+    Ticket ticket;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public MovieGUI(Theatre theatre)
+    public MovieGUI(Theatre theatre, Ticket ticket)
     {
         gui = new GUI("Theatre & Movie");
         this.theatre = theatre;
+        this.ticket = ticket;
         this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "root");
         int i = 0;
         this.movieVector = this.theatre.getMovies();
@@ -45,10 +47,15 @@ public class MovieGUI extends GUI implements ActionListener
         while(i < this.movieVector.size())
         {
             movieList[i] = this.movieVector.get(i).getMovie();
+            i++;
         }
+        setupMovie(movieList);
+        setSize(325,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        gui.setVisible(true);
     }
     
-    public void setupTheatre(String[] data){
+    public void setupMovie(String[] data){
         
         instructions = new JLabel("Please select the theatre & movie");
         list = new JList(data);
@@ -86,25 +93,9 @@ public class MovieGUI extends GUI implements ActionListener
         {
             int i = list.getSelectedIndex();
             this.movies = movieVector.get(i);
-            new ShowRoomGUI(this.theatre, this.movies);
+            this.ticket.setMovie(this.movies);
+            new ShowRoomGUI(this.theatre, this.movies, this.ticket);
         }
-    }
     
-    public void dbConnect(String dburl, String username, String password){
-        try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
-
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
-            while(rs.next()){
-                
-            }
-            rs.close();
-            stmt.close();
-            dbConnect.close();
-
-        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
-        }
     }
-    
 }

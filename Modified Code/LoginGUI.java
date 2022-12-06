@@ -97,7 +97,7 @@ public class LoginGUI extends GUI implements ActionListener
         
         if(event.getSource() == login)
         {
-            dbConnect("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+            dbConnect("jdbc:mysql://localhost/Ticketing_System", "root", "TThheevin25170");
             if(dbPassword==""){
                 JOptionPane.showMessageDialog(null, "Account does not exist");
             }
@@ -140,6 +140,13 @@ public class LoginGUI extends GUI implements ActionListener
 
         } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
         }
+    }
+
+    public static void main(String[] args)
+    {
+        new LoginGUI();/*if(args.length != 0)
+            System.out.println("Invalid number of arguments");*/
+        return;
     }
     
 }
