@@ -84,7 +84,9 @@ public class MovieGUI extends GUI implements ActionListener
         
         if(event.getSource() == selectShowRoom)
         {
-            
+            int i = list.getSelectedIndex();
+            this.movies = movieVector.get(i);
+            new ShowRoomGUI(this.theatre, this.movies);
         }
     }
     
