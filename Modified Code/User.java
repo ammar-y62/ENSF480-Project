@@ -8,8 +8,7 @@ public class User {
     private Payment payment;
     private Vector<Seats> seat = new Vector<>();*/
 
-    public User(String email, boolean regestered){
-        this.email = email;
+    public User(boolean regestered){
         this.registered = regestered;
     }
 

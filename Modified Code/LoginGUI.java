@@ -22,6 +22,7 @@ public class LoginGUI extends GUI implements ActionListener
     JButton exit = new JButton("Exit");
     JButton login = new JButton("Login");
     JButton guest = new JButton("Guest");
+    JButton signup = new JButton("Sign Up");
     
     JPanel headerPanel = new JPanel();
     JPanel loginPanel = new JPanel();
@@ -56,6 +57,7 @@ public class LoginGUI extends GUI implements ActionListener
         
         login.addActionListener(this);
         guest.addActionListener(this);
+        signup.addActionListener(this);
         exit.addActionListener(this);
         
         headerPanel.setLayout(new FlowLayout());
@@ -73,6 +75,7 @@ public class LoginGUI extends GUI implements ActionListener
         loginPanel.add(login);
         
         guestPanel.add(guest);
+        guestPanel.add(signup);
         guestPanel.add(exit);
         
         gui.add(headerPanel, BorderLayout.NORTH);
@@ -108,7 +111,7 @@ public class LoginGUI extends GUI implements ActionListener
         
         if(event.getSource() == guest)
         {
-            
+            User user = new User(false);
         }
     }
     

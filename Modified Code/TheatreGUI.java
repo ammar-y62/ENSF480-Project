@@ -9,66 +9,69 @@ import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
-public class MainGUI extends GUI implements ActionListener
+public class TheatreGUI extends GUI implements ActionListener
 {    
-    JButton exit = new JButton("Exit");
-    JButton cancelTicket = new JButton("Cancel Ticket");
-    JButton accountInfo = new JButton("Account Information");
-    JButton selectTheatreMovie = new JButton("Select Theathre & Movie");
-    JButton ticketList = new JButton("Ticket List");
+    private String[] columns = {"Theatre", "Movie"};
+    private JLabel instructions;
     
+    JButton exit = new JButton("Exit");
+    JButton selectMovie = new JButton("Select Movie");
+    
+    JPanel headerPanel = new JPanel();
     JPanel panel = new JPanel();
     JPanel endPanel = new JPanel();
         
-    boolean registration = false;  
+    JList list;
     
     GUI gui;
     Movie movies;
     Theatre theatres;
     User user;
+    Vector<Theatre> theatresVector;
     RegisteredUser ruser;
+    TicketingSystem system;
     
     Connection dbConnect;
     Statement stmt;
     ResultSet rs;
     
-    public MainGUI(User user)
+    public TheatreGUI()
     {
-        gui = new GUI("Main");
-    }
-
-    public MainGUI(RegisteredUser ruser)
-    {
-        if(ruser.getRegistration())
+        gui = new GUI("Theatre & Movie");
+        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "root");
+        int i = 0;
+        this.theatresVector = this.system.getTheatres();
+        String [] theatreList = new String[this.theatresVector.size()];
+        while(i < this.theatresVector.size())
         {
-            registration = true;
+            theatreList[i] = this.theatresVector.get(i).getTheatre();
         }
-        gui = new GUI("Main");
     }
     
-    public void setupLogin(){
+    public void setupTheatre(String[] data){
         
-        selectTheatreMovie.addActionListener(this);
-        cancelTicket.addActionListener(this);
+        instructions = new JLabel("Please select the theatre & movie");
+        list = new JList(data);
+        
+        selectMovie.addActionListener(this);
         exit.addActionListener(this);
-        ticketList.addActionListener(this);
+        
+        headerPanel.setLayout(new FlowLayout());
         
         panel.setLayout(new FlowLayout());
+        
         endPanel.setLayout(new FlowLayout());
         
+        headerPanel.add(instructions);
         
-        panel.add(selectTheatreMovie);
-        panel.add(cancelTicket);
+        panel.add(list);
         
-        if(registration){
-            accountInfo.addActionListener(this);
-            panel.add(accountInfo);
-        }
-        panel.add(ticketList);
+        endPanel.add(selectMovie);
         endPanel.add(exit);
         
+        gui.add(headerPanel, BorderLayout.NORTH);
         gui.add(panel, BorderLayout.CENTER);
-        gui.add(endPanel, BorderLayout.PAGE_END);   
+        gui.add(endPanel, BorderLayout.PAGE_END);    
     }
     
     @Override
@@ -79,17 +82,7 @@ public class MainGUI extends GUI implements ActionListener
             System.exit(0);
         }
         
-        if(event.getSource() == selectTheatreMovie)
-        {
-        
-        }
-        
-        if(event.getSource() == accountInfo)
-        {
-            
-        }
-        
-        if(event.getSource() == cancelTicket)
+        if(event.getSource() == selectMovie)
         {
             
         }

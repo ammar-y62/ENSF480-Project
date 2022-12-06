@@ -12,6 +12,11 @@ public class TicketingSystem
         createTheatres();
     }
 
+    public Vector<Theatre> getTheatres()
+    {
+        return this.theatres;
+    }
+
     public void DBConnect(String dburl, String username, String password)
     {
         Connection dbConnect;
