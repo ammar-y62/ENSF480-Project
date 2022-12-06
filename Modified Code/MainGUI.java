@@ -111,21 +111,4 @@ public class MainGUI extends GUI implements ActionListener
         }
     }
     
-    public void dbConnect(String dburl, String username, String password){
-        try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
-
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
-            while(rs.next()){
-                
-            }
-            rs.close();
-            stmt.close();
-            dbConnect.close();
-
-        } catch(Exception e){ JOptionPane.showMessageDialog(null," Error in connectivity");
-        }
-    }
-    
 }

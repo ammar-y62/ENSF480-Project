@@ -41,7 +41,7 @@ public class TheatreGUI extends GUI implements ActionListener
     public TheatreGUI()
     {
         gui = new GUI("Theatre & Movie");
-        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "TThheevin25170");
+        this.system = new TicketingSystem("jdbc:mysql://localhost/Ticketing_System", "root", "root");
         int i = 0;
         this.theatresVector = this.system.getTheatres();
         String [] theatreList = new String[this.theatresVector.size()];

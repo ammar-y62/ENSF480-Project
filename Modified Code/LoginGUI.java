@@ -32,9 +32,7 @@ public class LoginGUI extends GUI implements ActionListener
     User user;
     RegisteredUser ruser;
     
-    Connection dbConnect;
-    Statement stmt;
-    ResultSet rs;
+    
     String dbPassword;
     String dbName;
     String dbAddress;
@@ -97,7 +95,7 @@ public class LoginGUI extends GUI implements ActionListener
         
         if(event.getSource() == login)
         {
-            dbConnect("jdbc:mysql://localhost/Ticketing_System", "root", "TThheevin25170");
+            dbConnect("jdbc:mysql://localhost/TICKETING_SYSTEM", "root", "root");
             if(dbPassword==""){
                 JOptionPane.showMessageDialog(null, "Account does not exist");
             }
@@ -119,20 +117,26 @@ public class LoginGUI extends GUI implements ActionListener
             this.user = new User(false);
             new MainGUI(user);
         }
+
+        if(event.getSource() == signup)
+        {
+
+        }
     }
     
     public void dbConnect(String dburl, String username, String password){
         try {
-            dbConnect = DriverManager.getConnection(dburl, username, password);
-            stmt=dbConnect.createStatement();
+            
+            Connection dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/TICKETING_SYSTEM", "root", "root");
+            Statement stmt=dbConnect.createStatement();
 
-            rs=stmt.executeQuery("select * from accounts where username='"+ username +"';");
+            ResultSet rs=stmt.executeQuery("select * from accounts where username ='"+ username +"';");
             while(rs.next()){
-                dbPassword=rs.getString("password");
+                dbPassword=rs.getString("Password");
                 dbName=rs.getString("Name");
                 dbAddress=rs.getString("Address");
-                dbCardNumber=rs.getString("Card");
-                dbEmail=rs.getString("Email");
+                dbCardNumber=rs.getString("CardNumber");
+                //dbEmail=rs.getString("Email");
             }
             rs.close();
             stmt.close();
